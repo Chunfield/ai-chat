@@ -3,7 +3,7 @@ import type { Message } from "../../types";
 import MarkdownRenderer from "../MarkdownRenderer";
 
 // DeepSeek API 配置
-const API_KEY = "sk-0c8c951339814c7dae821fdee5a3179d";
+const API_KEY = "";
 const API_URL = "https://api.deepseek.com/v1/chat/completions";
 
 function Chat() {
