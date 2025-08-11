@@ -4,10 +4,14 @@ import { RedoOutlined } from '@ant-design/icons';
 import clsx from "clsx";
 import type { Message } from "../../types";
 import MarkdownRenderer from "../MarkdownRenderer";
-
 // DeepSeek API 配置
-const API_KEY = "sk-a0d3b78b4cef45589fc9c28e528905a2";
-const API_URL = "https://api.deepseek.com/v1/chat/completions";
+// const API_KEY = "";
+// const API_URL = "https://api.deepseek.com/v1/chat/completions";
+
+//Kimi API 配置
+const API_KEY = "";
+const API_URL = "https://api.moonshot.cn/v1/chat/completions";
+
 
 function Chat() {
   const [messages, setMessages] = useState<Message[]>([
@@ -54,11 +58,19 @@ function Chat() {
           "Content-Type": "application/json",
           Authorization: `Bearer ${API_KEY}`,
         },
+        // body: JSON.stringify({
+        //   model: "deepseek-chat",
+        //   messages: currentMessages,
+        //   stream: true,
+        // }),
         body: JSON.stringify({
-          model: "deepseek-chat",
+          model: "moonshot-v1-8k",
           messages: currentMessages,
           stream: true,
+          temperature: 0.7,
+          top_p: 1.0,
         }),
+
         signal: controller.signal,
       });
 
@@ -97,10 +109,24 @@ function Chat() {
           if (line.startsWith("data:")) {
             const dataStr = line.slice(5).trim();
             if (dataStr === "[DONE]" || !dataStr) continue;
+            // try {
+            //   const json = JSON.parse(dataStr);
+            //   const text = json.choices[0]?.delta?.content || "";
+            //   aiResponse += text;
 
+            //   // ✅ 只更新最后一条消息
+            //   setMessages((prev) => {
+            //     const updated = [...prev];
+            //     const lastMsg = updated[updated.length - 1];
+            //     if (lastMsg.role === "assistant") {
+            //       lastMsg.content = aiResponse;
+            //     }
+            //     return updated;
+            //   });
+            // } 
             try {
               const json = JSON.parse(dataStr);
-              const text = json.choices[0]?.delta?.content || "";
+              const text = json.choices[0]?.delta?.content || json.choices[0]?.content || "";
               aiResponse += text;
 
               // ✅ 只更新最后一条消息
@@ -138,57 +164,63 @@ function Chat() {
 
   return (
     <div className="flex flex-col h-screen w-full p-4">
-      <div className="flex-1 overflow-y-auto space-y-4 p-4">
-        {messages.map((msg, idx) => {
-          const userMessage = idx > 0 ? messages[idx - 1] : null;
-          const isAssistant = msg.role === "assistant";
-          return (
-            <div
-              key={idx}
-              className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
-            >
-              <div
-                className={clsx(
-                  'group',
-                  'max-w-xl lg:max-w-3xl px-4 py-3 rounded-lg',
-                  'break-words',
-                  'prose prose-sm dark:prose-invert max-w-none', // ✅ 推荐加入
-                  msg.role === 'user'
-                    ? 'bg-blue-500 text-white'
-                    : 'bg-gray-200 text-black'
-                )}
-                style={{ wordBreak: 'break-word' }} // 额外保险
-              >
-                <MarkdownRenderer content={msg.content} />
-
-                {isAssistant && !loading && (
-                  <Tooltip title="重新生成">
-                    <Button
-                      type="text"
-                      size="small"
-                      icon={<RedoOutlined />}
-                      onClick={() => {
-                        if (!userMessage || regeneratingIndex !== null) return;
-                        setRegeneratingIndex(idx);
-                        setMessages((prev) => prev.filter((_, i) => i !== idx));
-                        sendQuestion(userMessage.content).finally(() =>
-                          setRegeneratingIndex(null)
-                        );
-                      }}
-                      disabled={loading || regeneratingIndex !== null}
-                      className="absolute -bottom-8 right-0 opacity-0 group-hover:opacity-100 transition-opacity"                    />
-                  </Tooltip>
-                )}
-              </div>
-            </div>
-          );
-        })}
-        {loading && (
-          <div className="flex justify-start">
-            <div className="text-black px-4 py-2">AI 正在输入...</div>
+<div className="flex-1 overflow-y-auto space-y-4 p-4">
+  {messages.map((msg, idx) => {
+    const userMessage = idx > 0 ? messages[idx - 1] : null;
+    const isAssistant = msg.role === "assistant";
+    return (
+      <div
+        key={idx}
+        className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
+      >
+        {/* 外层容器：控制消息块整体对齐 */}
+        <div className="relative flex flex-col items-end">
+          {/* 气泡容器 */}
+          <div
+            className={clsx(
+              'max-w-xl lg:max-w-3xl px-4 py-3 rounded-lg',
+              'break-words',
+              'prose prose-sm dark:prose-invert max-w-none',
+              msg.role === 'user'
+                ? 'bg-blue-500 text-white'
+                : 'bg-gray-200 text-black'
+            )}
+            style={{ wordBreak: 'break-word' }}
+          >
+            <MarkdownRenderer content={msg.content} />
           </div>
-        )}
+
+          {/* 按钮容器：通过 flex 和 margin 定位 */}
+          {isAssistant && !loading && (
+            <div className="flex items-center ml-2 mt-1">
+              <Tooltip title="重新生成">
+                <Button
+                  type="text"
+                  size="small"
+                  icon={<RedoOutlined style={{ color: "black" }} />}
+                  onClick={() => {
+                    if (!userMessage || regeneratingIndex !== null) return;
+                    setRegeneratingIndex(idx);
+                    setMessages((prev) => prev.filter((_, i) => i !== idx));
+                    sendQuestion(userMessage.content).finally(() =>
+                      setRegeneratingIndex(null)
+                    );
+                  }}
+                  disabled={loading || regeneratingIndex !== null}
+                />
+              </Tooltip>
+            </div>
+          )}
+        </div>
       </div>
+    );
+  })}
+  {loading && (
+    <div className="flex justify-start">
+      <div className="text-black px-4 py-2">AI 正在输入...</div>
+    </div>
+  )}
+</div>
 
       <form onSubmit={handleSubmit} className="flex gap-2 border-t pt-2">
         <input
