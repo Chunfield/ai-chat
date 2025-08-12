@@ -8,31 +8,6 @@ interface MarkdownRendererProps {
 
 const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content }) => {
   const components: Components = {
-    p: ({ children }) => (
-      <p className="mb-1 last:mb-0 leading-relaxed">{children}</p>
-    ),
-    h1: ({ children }) => (
-      <h1 className="text-2xl font-bold text-gray-800 mt-6 mb-4 border-b pb-1">
-        {children}
-      </h1>
-    ),
-    h2: ({ children }) => (
-      <h2 className="text-xl font-semibold text-gray-700 mt-5 mb-3">
-        {children}
-      </h2>
-    ),
-    h3: ({ children }) => (
-      <h3 className="text-lg font-medium text-gray-700 mt-4 mb-2">
-        {children}
-      </h3>
-    ),
-    ul: ({ children }) => (
-      <ul className="list-disc list-inside mb-3 ml-4 space-y-1">{children}</ul>
-    ),
-    ol: ({ children }) => (
-      <ol className="list-decimal list-inside mb-3 ml-4 space-y-1">{children}</ol>
-    ),
-    li: ({ children }) => <li>{children}</li>,
     code({ className, children, ...props }) {
       const match = /language-(\w+)/.exec(className || '');
       const isInline = !match;
