@@ -19,8 +19,10 @@ export function useTheme(): UseThemeReturn {
   useEffect(() => {
     if (darkMode) {
       document.documentElement.classList.add('dark');
+      console.log(darkMode,"111")
     } else {
       document.documentElement.classList.remove('dark');
+      console.log(darkMode,"222")
     }
     localStorage.setItem('darkMode', String(darkMode));
   }, [darkMode]);

@@ -4,4 +4,16 @@
   --color-rose-gold-dark:  #f09c8a;
   --color-rose-gold-light:  #feeae4;
   --color-rose-gold:  #f8d7cb;
+  --color-bg: rgb(var(--color-bg) / <alpha-value>);
+  --color-text: rgb(var(--color-text) / <alpha-value>);
+}
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --bg: 255 255 255;
+  --text: 0 0 0;
+}
+.dark {
+  --bg: 10 10 10;
+  --text: 255 255 255;
 }

@@ -45,7 +45,7 @@ export default function Chat() {
         messages={messages}
         loading={loading}
         onRegenerate={handleRegenerate}
-        regeneratingIndex={null}
+        regeneratingIndex={regeneratingIndex}
       />
       <ChatInput
         value={input}

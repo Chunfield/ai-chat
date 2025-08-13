@@ -47,7 +47,6 @@ export default function ChatHeader({
         type="text"
         icon={darkMode ? <SunOutlined /> : <MoonOutlined />}
         onClick={onToggleTheme}
-        className={darkMode ? 'text-yellow-300 hover:text-yellow-100' : 'text-gray-600 hover:text-gray-800'}
       >
         {darkMode ? '亮色主题' : '暗色主题'}
       </Button>

@@ -29,7 +29,7 @@ export default function MessageItem({
             'dark:prose-invert',
             isUser
               ? 'bg-blue-500 text-white max-w-xl lg:max-w-3xl'
-              : 'bg-white dark:bg-gray-800 text-black dark:text-white w-full max-w-4xl'
+              : 'bg-gray-200 dark:bg-gray-800 text-black dark:text-white w-full max-w-4xl'
           )}
         >
           <MarkdownRenderer content={message.content} />
