@@ -1,8 +1,8 @@
-import { Button, Tooltip } from 'antd';
-import { RedoOutlined } from '@ant-design/icons';
-import clsx from 'clsx';
-import MarkdownRenderer from '../../../MarkdownRenderer';
-import type { Message } from '../../../../types';
+import { Button, Tooltip } from "antd";
+import { RedoOutlined } from "@ant-design/icons";
+import clsx from "clsx";
+import MarkdownRenderer from "../../../MarkdownRenderer";
+import type { Message } from "../../../../types";
 
 interface MessageItemProps {
   message: Message;
@@ -18,18 +18,18 @@ export default function MessageItem({
   onRegenerate,
   regenerating,
 }: MessageItemProps) {
-  const isUser = message.role === 'user';
+  const isUser = message.role === "user";
 
   return (
-    <div className={`flex ${isUser ? 'justify-end' : 'justify-start'}`}>
+    <div className={`flex ${isUser ? "justify-end" : "justify-start"}`}>
       <div className="relative flex flex-col items-end max-w-full">
         <div
           className={clsx(
-            'px-4 py-3 rounded-lg break-words prose prose-sm max-w-none',
-            'dark:prose-invert',
+            "px-4 py-3 rounded-lg break-words prose prose-sm max-w-none",
+            "dark:prose-invert",
             isUser
-              ? 'bg-blue-500 text-white max-w-xl lg:max-w-3xl'
-              : 'bg-gray-200 dark:bg-gray-800 text-black dark:text-white w-full max-w-4xl'
+              ? "bg-blue-500 text-white max-w-xl lg:max-w-3xl"
+              : "bg-gray-200 dark:bg-gray-800 text-black dark:text-white w-full max-w-4xl"
           )}
         >
           <MarkdownRenderer content={message.content} />

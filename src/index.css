@@ -1,9 +1,10 @@
+@import "antd/dist/reset.css";
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 @theme {
-  --color-rose-gold-dark:  #f09c8a;
-  --color-rose-gold-light:  #feeae4;
-  --color-rose-gold:  #f8d7cb;
+  --color-rose-gold-dark: #f09c8a;
+  --color-rose-gold-light: #feeae4;
+  --color-rose-gold: #f8d7cb;
   --color-bg: rgb(var(--color-bg) / <alpha-value>);
   --color-text: rgb(var(--color-text) / <alpha-value>);
 }

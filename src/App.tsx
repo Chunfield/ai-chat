@@ -1,18 +1,21 @@
-import { ConfigProvider, theme } from 'antd';
-import { useTheme } from './components/Chat/hooks/useTheme';
 import GradientContainer from "./components/Container";
+import { ConfigProvider, theme } from "antd";
+import { useThemeStore } from "./store/theme";
 
 function App() {
-  const { darkMode } = useTheme();
-  console.log('App darkMode:', darkMode); // 调试用
+  const currentTheme = useThemeStore(s => s.currentTheme);
 
   return (
     <ConfigProvider
-    theme={{
-      algorithm: darkMode ? theme.darkAlgorithm : theme.defaultAlgorithm,
-    }}
+      theme={{
+        algorithm: currentTheme === "dark" ? theme.darkAlgorithm : theme.defaultAlgorithm,
+        token: {
+          colorPrimary: "#1677ff",
+          borderRadius: 4,
+        },
+      }}
     >
-      <GradientContainer></GradientContainer>
+      <GradientContainer />
     </ConfigProvider>
   );
 }
