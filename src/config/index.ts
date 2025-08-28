@@ -11,5 +11,11 @@ export const API_CONFIGS = {
     apiUrl: "https://api.deepseek.com/v1/chat/completions ",
     model: "deepseek-chat",
   },
+  qwen: {
+    name: "Qwen (qwen-plus)",
+    apiKey: import.meta.env.VITE_QWEN_API_KEY as string,
+    apiUrl: "https://dashscope.aliyuncs.com/api/v1/services/aigc/text-generation/generation",
+    model: "qwen-plus",
+  },
 } as const;
 export type ModelType = keyof typeof API_CONFIGS;
