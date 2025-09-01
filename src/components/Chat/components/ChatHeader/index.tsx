@@ -1,7 +1,7 @@
 import { Button, Dropdown, Menu } from "antd";
 import { MoonOutlined, SunOutlined, DownOutlined } from "@ant-design/icons";
 import { useThemeStore } from "../../../../store/theme";
-import { useChatStore } from "../../../../store/chat-stream"; // 如果模型也下沉
+import { useChatStore } from "../../../../store/chatstream"; // 如果模型也下沉
 import type { ModelType } from "../../../../config";
 import { API_CONFIGS } from "../../../../config";
 
@@ -16,6 +16,7 @@ export default function ChatHeader() {
     <Menu selectedKeys={[currentModel]} onClick={({ key }) => setCurrentModel(key as ModelType)}>
       <Menu.Item key="kimi">{API_CONFIGS.kimi.name}</Menu.Item>
       <Menu.Item key="deepseek">{API_CONFIGS.deepseek.name}</Menu.Item>
+      <Menu.Item key="qwen">{API_CONFIGS.qwen.name}</Menu.Item>
     </Menu>
   );
 

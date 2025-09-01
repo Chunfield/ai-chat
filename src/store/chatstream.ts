@@ -72,7 +72,6 @@ export const useChatStore = create<ChatState>()(
   )
 );
 
-/* ---------- 私有工具：流式拉取 ---------- */
 let controller: AbortController | null = null;
 
 async function fetchStream(

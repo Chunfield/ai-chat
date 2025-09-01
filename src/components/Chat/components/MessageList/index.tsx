@@ -1,5 +1,5 @@
 import MessageItem from "../MessageItem";
-import { useChatStore } from "../../../../store/chat-stream";
+import { useChatStore } from "../../../../store/chatstream";
 
 export default function MessageList() {
   /* ---------- 全局订阅 ---------- */
