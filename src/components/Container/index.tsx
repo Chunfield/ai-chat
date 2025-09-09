@@ -1,6 +1,6 @@
 import React from "react";
 import Chat from "../Chat";
-
+import SideBar from "../SideBar";
 interface GradientContainerProps {
   children?: React.ReactNode;
 }
@@ -14,13 +14,12 @@ const GradientContainer: React.FC<GradientContainerProps> = () => {
             bg-white dark:bg-gray-800 
             rounded-lg flex items-center justify-center
             shadow-lg
+            overflow-hidden
           "
       >
-        <div className="w-1/5">
-          <div className="text-center text-gray-700 dark:text-gray-300">待开发</div>
-        </div>
+        <SideBar />
         <div className="w-px bg-gray-200 dark:bg-gray-700 h-full" />
-        <div className="w-4/5 h-full rounded-r-lg">
+        <div className="w-4/5 h-full">
           <Chat />
         </div>
       </div>

@@ -1,7 +1,7 @@
 import { Button, Dropdown, Menu } from "antd";
 import { MoonOutlined, SunOutlined, DownOutlined } from "@ant-design/icons";
-import { useThemeStore } from "../../../../store/theme";
-import { useChatStore } from "../../../../store/chatstream"; // 如果模型也下沉
+import { useThemeStore } from "../../../../stores/theme";
+import { useChatStore } from "../../../../stores/chatstream"; // 如果模型也下沉
 import type { ModelType } from "../../../../config";
 import { API_CONFIGS } from "../../../../config";
 
@@ -23,7 +23,7 @@ export default function ChatHeader() {
   const handleThemeToggle = () => toggleTheme();
 
   return (
-    <div className="flex justify-between items-center bg-white dark:bg-gray-800 rounded-tr-lg border-b border-gray-200 dark:border-gray-700 px-4 py-3 mb-4 sticky top-0 z-10">
+    <div className="flex justify-between items-center bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-4 py-3 mb-4 sticky top-0 z-10">
       <div className="flex items-center space-x-2">
         <span className="text-gray-700 dark:text-gray-200 font-medium">当前模型:</span>
         <Dropdown overlay={menu} trigger={["click"]}>

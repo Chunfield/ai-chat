@@ -1,7 +1,7 @@
 import { Input, Button } from "antd";
 import { SendOutlined, StopOutlined } from "@ant-design/icons";
 import { useRef, useState } from "react";
-import { useChatStore } from "../../../../store/chatstream";
+import { useChatStore } from "../../../../stores/chatstream";
 
 export default function ChatInput() {
   const { input, loading, setInput, send, abort } = useChatStore();

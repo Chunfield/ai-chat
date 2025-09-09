@@ -1,4 +1,3 @@
-export type Message = {
-  role: "user" | "assistant";
-  content: string;
-};
+// types/index.ts
+export * from "./auth";
+export * from "./message";

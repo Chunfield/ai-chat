@@ -1,7 +1,7 @@
 // src/store/chat.ts
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
-import type { Message } from "../types";
+import type { Message } from "@/types";
 import { API_CONFIGS, type ModelType } from "../config";
 
 /* ---------- 全局声明：给 window._chatAbort 用 ---------- */

@@ -2,7 +2,7 @@ import { Button, Tooltip } from "antd";
 import { RedoOutlined } from "@ant-design/icons";
 import clsx from "clsx";
 import MarkdownRenderer from "../../../MarkdownRenderer";
-import type { Message } from "../../../../types";
+import type { Message } from "@/types";
 
 interface MessageItemProps {
   message: Message;
