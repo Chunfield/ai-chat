@@ -1,8 +1,8 @@
 import type { RegisterData, RegisterResponse } from "@/types/auth";
-// const API_BASE_URL = import.meta.env.VITE_PUBLIC_API_BASE_URL as string;
+const API_BASE = (import.meta.env.VITE_API_BASE_URL as string) || ("" as string);
 
 export const register = async (data: RegisterData): Promise<RegisterResponse> => {
-  const res = await fetch("/api/register", {
+  const res = await fetch(API_BASE ? `${API_BASE}/api/register` : "/api/register", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),

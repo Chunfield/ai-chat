@@ -4,6 +4,8 @@ import { create } from "zustand";
 import type { RegisterData, LoginData, User as ApiUser, ErrorResponse } from "@/types/auth";
 import { register as apiRegister, login as apiLogin } from "@/lib/api/auth";
 
+const API_BASE = (import.meta.env.VITE_API_BASE_URL as string) || ("" as string);
+
 // 前端用户类型（camelCase）
 interface AuthUser {
   id: number;
@@ -112,7 +114,7 @@ export const useAuthStore = create<AuthState>(set => ({
   checkAuth: async () => {
     set({ loading: true });
     try {
-      const res = await fetch("/api/me", {
+      const res = await fetch(API_BASE ? `${API_BASE}/api/me` : "/api/me", {
         method: "GET",
         credentials: "include",
       });

@@ -1,5 +1,6 @@
 import type { LoginData, LoginResponse } from "@/types/auth";
 
+const API_BASE = (import.meta.env.VITE_API_BASE_URL as string) || ("" as string);
 // ✅ 类型守卫：复用 ErrorResponse
 function isErrorResponse(data: unknown): data is { error: string } {
   return (
@@ -13,7 +14,9 @@ function isErrorResponse(data: unknown): data is { error: string } {
 export const login = async (data: LoginData): Promise<LoginResponse> => {
   let res: Response;
   try {
-    res = await fetch("/api/login", {
+    const url = API_BASE ? `${API_BASE}/api/login` : "/api/login";
+
+    res = await fetch(url, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
